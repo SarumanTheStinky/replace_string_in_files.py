@@ -44,9 +44,17 @@ def transform_string_in_files(root_dir, oldString, newString
             # if not (file.endswith(except_file_extensions) or file in ("legollum.xlsx", "gimlum.xlsx")):
 
             file_path = os.path.join(root, file)
+            
+            # --- EXCLUSION LOGIC ---
+            file_extension = os.path.splitext(file)[1].lower()
 
+            if file_extension in except_file_extensions:
+                print(f"Skipping excluded file type: {file_path}")
+                continue
+            # -----------------------
+            
             # === DEBUG: print file path being processed ===
-            # print("Processing file:", file_path)
+            print("Processing file:", file_path)
 
             try:
                 if file.endswith('.xlsx'):
